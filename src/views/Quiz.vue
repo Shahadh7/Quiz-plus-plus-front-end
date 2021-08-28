@@ -181,12 +181,12 @@ export default {
             ],
             selectedLevel: "",
             selectedSubjects: [],
-            randomtext: "",
+            randomtext: ""
         }
     },
     methods: {
         randomQuote() {
-            axios.get('http://127.0.0.1:8000/api/sayings').then((res) =>{
+            axios.get(`${process.env.VUE_APP_REST_API}/api/sayings`).then((res) =>{
                 console.log(res.data);
                 this.randomtext = res.data.saying+"("+res.data.author+")";
             })
