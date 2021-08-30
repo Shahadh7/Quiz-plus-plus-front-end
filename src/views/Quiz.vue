@@ -29,7 +29,7 @@
                                     <v-chip
                                     filter
                                     outlined
-                                    v-for="item in levels" :key="item.levelId" 
+                                    v-for="item in levels" :key="item.id" 
                                     >
                                     {{item.level}}
                                     </v-chip>
@@ -45,14 +45,14 @@
                                     <v-chip
                                         filter
                                         outlined
-                                        v-for="item in subjectList" :key="item.subjectId" 
+                                        v-for="item in subjectList" :key="item.id" 
                                     >
-                                    {{item.subject}}
+                                    {{item.name}}
                                     </v-chip>
                                 </v-chip-group>
                             </v-card-text>
-
-                            <v-btn color="secondary" class="ml-4">Filter</v-btn>
+                            {{selectedLevel}}
+                            <v-btn color="secondary" class="ml-4" @click="filterExams">Filter</v-btn>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                     </v-expansion-panels>
@@ -60,24 +60,30 @@
                     <v-list shaped>
                         <v-subheader>Available quizzes</v-subheader>
                         <v-list-item-group
-                            v-model="selectedItem"
                             color="primary"
+                            
                         >
-                            <v-list-item
-                            v-for="(item, i) in availableExams"
-                            :key="i"
+                            <div v-if="availableExams">
+                                    <v-list-item
+                            v-for="(item) in availableExams"
+                            :key="item.id"
                             >
                                 <v-list-item-icon>
-                                    <v-icon v-text="item.icon"></v-icon>
+                                    <v-icon v-text="icon"></v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
-                                    <v-list-item-title v-text="item.text"></v-list-item-title>
+                                    <v-list-item-title v-text="item.exam_name"></v-list-item-title>
                                     <p class="text--secondary">Duration: {{item.duration}}</p>
-                                    <p class="text--secondary">No of attempts: {{item.noOfAttempts}}</p>
+                                    <p class="text--secondary">No of attempts: --</p>
                                     <p class="text--secondary">Exam date: {{item.date}}</p>
                                 </v-list-item-content>
-                                <v-btn color="secondary" @click="$router.push({ name: 'QuizAttempt', params: { slug: item.slug } })">Attempt</v-btn>
+                                <v-btn color="secondary" @click="$router.push({ name: 'QuizAttempt', params: { slug: item.slug , id: item.id } })">Attempt</v-btn>
                             </v-list-item>
+                            </div>
+                            <div v-else>
+                                No exams available
+                            </div>
+                            
                         </v-list-item-group>
                     </v-list>
                     
@@ -92,36 +98,8 @@ export default {
   components: { CreateQuiz },
     data() {
         return {
-            subjectList: [
-                {
-                    subjectId: 1,
-                    subject: "Maths"
-                },
-                {
-                    subjectId: 2,
-                    subject: "English"
-                },
-                {
-                    subjectId: 3,
-                    subject: "Tamil"
-                },
-                {
-                    subjectId: 4,
-                    subject: "Sinhala"
-                },
-                {
-                    subjectId: 5,
-                    subject: "Science"
-                },
-                {
-                    subjectId: 6,
-                    subject: "Religion"
-                },
-                {
-                    subjectId: 7,
-                    subject: "ICT"
-                }
-            ],
+            subjectList: [],
+            icon: "mdi-cards-diamond-outline",
             levels: [
                 {
                     levelId:1,
@@ -144,41 +122,7 @@ export default {
                     level: "Grade 5",
                 },
             ],
-            availableExams: [
-                {
-                    examId: 1,
-                    icon: 'mdi-cards-diamond-outline',
-                    text: "Simple Math",
-                    duration: '2h',
-                    level: 'Grade 2',
-                    subject: 'Maths',
-                    noOfAttempts: '2',
-                    slug:'simple-math-grade-3',
-                    date: new Date().toLocaleDateString()
-                },
-                {
-                    examId: 2,
-                    icon: 'mdi-cards-diamond-outline',
-                    text: "Applied Science New",
-                    duration: '2h',
-                    subject: 'Maths',
-                    level: 'Grade 1',
-                    noOfAttempts: '2',
-                    slug:'applied-science-grade-1',
-                    date: new Date().toLocaleDateString()
-                },
-                {
-                    examId: 3,
-                    icon: 'mdi-cards-diamond-outline',
-                    text: "John Rambo",
-                    duration: '2h',
-                    level: 'Grade 1',
-                    subject: 'Maths',
-                    noOfAttempts: '2',
-                    slug:'john-rambo-grade-2',
-                    date: new Date().toLocaleDateString()
-                }
-            ],
+            availableExams: [],
             selectedLevel: "",
             selectedSubjects: [],
             randomtext: ""
@@ -187,13 +131,71 @@ export default {
     methods: {
         randomQuote() {
             axios.get(`${process.env.VUE_APP_REST_API}/api/sayings`).then((res) =>{
-                console.log(res.data);
+                // console.log(res.data);
                 this.randomtext = res.data.saying+"("+res.data.author+")";
             })
+        },
+        getAllAvailableExams() {
+            axios.get(`${process.env.VUE_APP_REST_API}/api/exams`).then((res) => {
+                // console.log(res.data['exams']);
+                this.availableExams = res.data['exams'];
+            })
+        },
+        getSubjects() {
+            axios.get(`${process.env.VUE_APP_REST_API}/api/subjects`).then((res) => {
+                this.subjectList = res.data;
+            })
+        },
+        getLevels() {
+            axios.get(`${process.env.VUE_APP_REST_API}/api/levels`).then((res) => {
+                this.levels = res.data;
+            })
+        },
+        filterExams() {
+              if((this.selectedLevel !== "" && this.selectedSubjects.length > 0 && isNaN(this.selectedLevel) == false )) {
+                var level = this.selectedLevel + 1
+                var subjects = this.selectedSubjects.map(function(val){return ++val;});
+                axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    params: {
+                        level: level,
+                        subjects: subjects
+                    }
+                }).then((res) => {
+                        this.availableExams = res.data
+                        //this.availableExams = res.data['exams'];
+                }) 
+              }else if (this.selectedLevel !== "" && isNaN(this.selectedLevel) == false) {
+                level = this.selectedLevel + 1
+                axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    params: {
+                        level: level,
+                    }
+                }).then((res) => {
+                        this.availableExams = res.data
+                        //this.availableExams = res.data['exams'];
+                }) 
+              }else if (this.selectedSubjects.length > 0) {
+                subjects = this.selectedSubjects.map(function(val){return ++val;});
+                axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    params: {
+                        subjects: subjects
+                    }
+                }).then((res) => {
+                        this.availableExams = res.data
+                        //this.availableExams = res.data['exams'];
+                }) 
+              }else {
+                  this.getAllAvailableExams()
+              }
+               
+               
         } 
     },
     mounted() {
         this.randomQuote()
+        this.getAllAvailableExams();
+        this.getSubjects()
+        this.getLevels()
     },
 }
 </script>

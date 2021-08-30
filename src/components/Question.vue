@@ -168,6 +168,7 @@
     },
     mounted() {
         this.setInitialQuestionList();
+        console.log(this.questionList);
     },
   }
 </script>

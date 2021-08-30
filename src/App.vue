@@ -1,8 +1,8 @@
 <template>
   <v-app>
+
     <v-navigation-drawer app
                         v-model="drawer"
-                        absolute
                         temporary
                         color="lime accent-2"
     >
@@ -13,34 +13,24 @@
         <v-list-item-group
           v-model="group"
           active-class="red--text text--accent-3 font-weight-medium"
+          
         >
-          <v-list-item @click="$router.push('/')">
-            <v-list-item-icon>
-              <v-icon >mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Sign in</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="$router.push('/quiz')">
-            <v-list-item-icon>
-              <v-icon>mdi-book-multiple</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Quiz</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="$router.push('/about')">
-            <v-list-item-icon>
-              <v-icon>mdi-information</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>About</v-list-item-title>
-          </v-list-item>
+          <router-link 
+          v-for="(item, key) in navItems" :key="key"
+          :to= item.path
+          style="text-decoration: none;"
+          >
+            <v-list-item>
+              <v-list-item-icon >
+                <v-icon >{{item.icon}}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>{{item.text}}</v-list-item-title>
+            </v-list-item>
+            </router-link>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
+    
 
     <v-app-bar app
               color="black"
@@ -82,6 +72,8 @@
       
     </v-app-bar>
 
+    
+
     <!-- Sizes your content based upon application components -->
     <v-main class="back">
 
@@ -102,6 +94,33 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
+    navItems: [
+      {
+        "text": "Home",
+        "path" : "/",
+        "icon" : "mdi-home"
+      },
+      {
+        "text": "Sign in",
+        "path" : "/sign-in",
+        "icon" : "mdi-login"
+      },
+      {
+        "text": "Quiz",
+        "path" : "/quiz",
+        "icon" : "mdi-file"
+      },
+      {
+        "text": "About",
+        "path" : "/about",
+        "icon" : "mdi-information"
+      },
+      {
+        "text": "###",
+        "path" : "",
+        "icon" : ""
+      }
+    ]
   }),
 };
 </script>

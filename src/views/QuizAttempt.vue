@@ -11,9 +11,9 @@
                 
                 <v-divider class="mx-4"></v-divider>
                 <div>
-                    <v-card-text>{{currentQuiz.question}}</v-card-text>
+                    <v-card-text>Question {{page}}: {{currentQuiz.quiz}}</v-card-text>
                 </div>
-                <v-list shaped  v-for="item in currentQuiz['answers']" :key="item.answerId">
+                <v-list shaped  v-for="(item, i) in currentQuiz.answers" :key="item.id">
                     
                     <v-list-item-group
                         v-model="selectedAnswers"
@@ -33,7 +33,7 @@
                         >
                             <template v-slot:default="{ active }">
                             <v-list-item-content>
-                                <v-card-text v-text="`${item.answerId}.  ${item.answer}`"></v-card-text>
+                                <v-card-text v-text="`${i + 1}.  ${item.answer}`"></v-card-text>
                             </v-list-item-content>
 
                             <v-list-item-action>
@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -187,8 +188,15 @@ export default {
         }
     },
     methods: {
-        alert() {
-            alert("asd")
+        getAllQuestionAndAnswers() {
+            console.log(this.$route.params.id);
+
+            axios.get(`${process.env.VUE_APP_REST_API}/api/exams/${this.$route.params.id}`).then((res) => {
+                console.log(res.data);
+                this.questionAnswers = res.data.quizs
+            }).catch((err) => {
+                console.log(err);
+            })
         },
         next() {
             if(this.page === this.questionAnswers.length ) return
@@ -206,7 +214,7 @@ export default {
     },
     watch: {
         page: function (pageno_new) {
-            this.answer = 'Waiting for you to stop typing...'
+            //this.answer = 'Waiting for you to stop typing...'
             // let previousPage = pageno_old;
             // let nextPage = pageno_new + 1 ;
             this.currentQuiz = this.questionAnswers[pageno_new-1];
@@ -214,7 +222,7 @@ export default {
     },
     mounted() {
         this.currentQuiz = this.questionAnswers[0]
-        //console.log(this.currentQuiz['answers'])
+        this.getAllQuestionAndAnswers();
     },
 }
 </script>
