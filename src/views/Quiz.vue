@@ -156,6 +156,10 @@ export default {
                 var level = this.selectedLevel + 1
                 var subjects = this.selectedSubjects.map(function(val){return ++val;});
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    headers: {
+                        "Accept": 'application/json',
+                        "Access-Control-Allow-Origin" : "*"
+                    },
                     params: {
                         level: level,
                         subjects: subjects
@@ -167,6 +171,10 @@ export default {
               }else if (this.selectedLevel !== "" && isNaN(this.selectedLevel) == false) {
                 level = this.selectedLevel + 1
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    headers: {
+                        "Accept": 'application/json',
+                        "Access-Control-Allow-Origin" : "*"
+                    },
                     params: {
                         level: level,
                     }
@@ -177,6 +185,10 @@ export default {
               }else if (this.selectedSubjects.length > 0) {
                 subjects = this.selectedSubjects.map(function(val){return ++val;});
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    headers: {
+                        "Accept": 'application/json',
+                        "Access-Control-Allow-Origin" : "*"
+                    },
                     params: {
                         subjects: subjects
                     }
