@@ -219,8 +219,8 @@ export default {
         test() {
 
             return new Promise(function(resolve, reject) {
-                fetch('https://safe-gorge-82079.herokuapp.com/api/exams').then(response => {
-                    console.log(response.data);
+                fetch('https://safe-gorge-82079.herokuapp.com/api/exams/level=1').then(response => {
+                    console.log(response);
                     resolve(response);
                 }).catch((err) => {
                     console.log(err)
