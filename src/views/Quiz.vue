@@ -226,8 +226,11 @@ export default {
                 }).then(response => {
                     console.log(response.data);
                     resolve(response);
+                }).catch((err) => {
+                    console.log(err)
+                    reject(err);
                 })
-                })
+            })
         } 
     },
     mounted() {
