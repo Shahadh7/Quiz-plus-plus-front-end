@@ -215,6 +215,11 @@ export default {
               }
                
                
+        },
+        test() {
+            axios.get('https://safe-gorge-82079.herokuapp.com/api/exams/?level=1').then((res) => {
+                console.log(res.data)
+            })
         } 
     },
     mounted() {
@@ -222,6 +227,8 @@ export default {
         this.getAllAvailableExams();
         this.getSubjects()
         this.getLevels()
+        this.test()
+
     },
 }
 </script>
