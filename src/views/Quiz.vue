@@ -130,7 +130,7 @@ export default {
     },
     methods: {
         randomQuote() {
-            axios.get(`${process.env.VUE_APP_REST_API}/api/sayings`,{
+            axios.get(`${process.env.VUE_APP_REST_API}/sayings`,{
                 headers: {
                     'Accept': 'application/json'
                 }
@@ -140,7 +140,7 @@ export default {
             })
         },
         getAllAvailableExams() {
-            axios.get(`${process.env.VUE_APP_REST_API}/api/exams`,{
+            axios.get(`${process.env.VUE_APP_REST_API}/exams`,{
                 headers: {
                     'Accept': 'application/json'
                 }
@@ -150,7 +150,7 @@ export default {
             })
         },
         getSubjects() {
-            axios.get(`${process.env.VUE_APP_REST_API}/api/subjects`,{
+            axios.get(`${process.env.VUE_APP_REST_API}/subjects`,{
                 headers: {
                     'Accept': 'application/json'
                 }
@@ -159,7 +159,7 @@ export default {
             })
         },
         getLevels() {
-            axios.get(`${process.env.VUE_APP_REST_API}/api/levels`,{
+            axios.get(`${process.env.VUE_APP_REST_API}/levels`,{
                 headers: {
                     'Accept': 'application/json'
                 }
@@ -171,7 +171,7 @@ export default {
               if((this.selectedLevel !== "" && this.selectedSubjects.length > 0 && isNaN(this.selectedLevel) == false )) {
                 var level = this.selectedLevel + 1
                 var subjects = this.selectedSubjects.map(function(val){return ++val;});
-                axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
                     headers: {
                         'Accept': 'application/json'
                     },
@@ -185,7 +185,7 @@ export default {
                 }) 
               }else if (this.selectedLevel !== "" && isNaN(this.selectedLevel) == false) {
                 level = this.selectedLevel + 1
-                axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
                     headers: {
                         'Accept': 'application/json'
                     },
@@ -198,7 +198,7 @@ export default {
                 }) 
               }else if (this.selectedSubjects.length > 0) {
                 subjects = this.selectedSubjects.map(function(val){return ++val;});
-                axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
                     headers: {
                         'Accept': 'application/json'
                     },
