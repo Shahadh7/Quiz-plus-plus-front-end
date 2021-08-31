@@ -217,10 +217,14 @@ export default {
                
         },
         test() {
-            axios.get('https://safe-gorge-82079.herokuapp.com/api/exams/?level=1', data="null",{
-                Host: "https://safe-gorge-82079.herokuapp.com"
+            axios.get('https://safe-gorge-82079.herokuapp.com/api/exams/?level=1',{
+                headers: {
+                    Accept: 'application/json'
+                }
             }).then((res) => {
                 console.log(res)
+            }).catch((err) => {
+                console.log(err);
             })
         } 
     },
