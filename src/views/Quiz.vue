@@ -220,6 +220,7 @@ export default {
 
             return new Promise(function(resolve, reject) {
                 fetch('https://safe-gorge-82079.herokuapp.com/api/exams/?level=1',{
+                    mode: "no-cors",
                     headers: {
                         Accept: 'application/json',
                         Host: 'https://safe-gorge-82079.herokuapp.com'
