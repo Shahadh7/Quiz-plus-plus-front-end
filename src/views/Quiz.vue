@@ -130,24 +130,40 @@ export default {
     },
     methods: {
         randomQuote() {
-            axios.get(`${process.env.VUE_APP_REST_API}/api/sayings`).then((res) =>{
+            axios.get(`${process.env.VUE_APP_REST_API}/api/sayings`,{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) =>{
                 // console.log(res.data);
                 this.randomtext = res.data.saying+"("+res.data.author+")";
             })
         },
         getAllAvailableExams() {
-            axios.get(`${process.env.VUE_APP_REST_API}/api/exams`).then((res) => {
+            axios.get(`${process.env.VUE_APP_REST_API}/api/exams`,{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
                 // console.log(res.data['exams']);
                 this.availableExams = res.data['exams'];
             })
         },
         getSubjects() {
-            axios.get(`${process.env.VUE_APP_REST_API}/api/subjects`).then((res) => {
+            axios.get(`${process.env.VUE_APP_REST_API}/api/subjects`,{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
                 this.subjectList = res.data;
             })
         },
         getLevels() {
-            axios.get(`${process.env.VUE_APP_REST_API}/api/levels`).then((res) => {
+            axios.get(`${process.env.VUE_APP_REST_API}/api/levels`,{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
                 this.levels = res.data;
             })
         },
@@ -156,6 +172,9 @@ export default {
                 var level = this.selectedLevel + 1
                 var subjects = this.selectedSubjects.map(function(val){return ++val;});
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     params: {
                         level: level,
                         subjects: subjects
@@ -167,6 +186,9 @@ export default {
               }else if (this.selectedLevel !== "" && isNaN(this.selectedLevel) == false) {
                 level = this.selectedLevel + 1
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     params: {
                         level: level,
                     }
@@ -177,6 +199,9 @@ export default {
               }else if (this.selectedSubjects.length > 0) {
                 subjects = this.selectedSubjects.map(function(val){return ++val;});
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     params: {
                         subjects: subjects
                     }
