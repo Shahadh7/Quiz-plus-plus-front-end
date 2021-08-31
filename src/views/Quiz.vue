@@ -157,7 +157,7 @@ export default {
                 var subjects = this.selectedSubjects.map(function(val){return ++val;});
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
                     headers: {
-                        Accept: 'application/json',   
+                        "Accept": 'application/json',   
                     },
                     params: {
                         level: level,
@@ -171,7 +171,7 @@ export default {
                 level = this.selectedLevel + 1
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
                     headers: {
-                        Accept: 'application/json',   
+                        "Accept": 'application/json',   
                     },
                     params: {
                         level: level,
@@ -184,7 +184,7 @@ export default {
                 subjects = this.selectedSubjects.map(function(val){return ++val;});
                 axios.get(`${process.env.VUE_APP_REST_API}/api/exams/`,{
                     headers: {
-                        Accept: 'application/json',   
+                        "Accept": 'application/json',   
                     },
                     params: {
                         subjects: subjects
