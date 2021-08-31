@@ -217,15 +217,17 @@ export default {
                
         },
         test() {
-            axios.get('https://safe-gorge-82079.herokuapp.com/api/exams/?level=1',{
-                headers: {
-                    Accept: 'application/json'
-                }
-            }).then((res) => {
-                console.log(res)
-            }).catch((err) => {
-                console.log(err);
-            })
+
+            return new Promise(function(resolve, reject) {
+                fetch('https://safe-gorge-82079.herokuapp.com/api/exams/?level=1', {
+                    params: {
+                    level: 1,
+                    }
+                }).then(response => {
+                    console.log(response.data);
+                    resolve(response);
+                })
+                })
         } 
     },
     mounted() {
