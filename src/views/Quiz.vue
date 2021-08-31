@@ -132,7 +132,8 @@ export default {
         randomQuote() {
             axios.get(`${process.env.VUE_APP_REST_API}/sayings`,{
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             }).then((res) =>{
                 // console.log(res.data);
@@ -142,7 +143,8 @@ export default {
         getAllAvailableExams() {
             axios.get(`${process.env.VUE_APP_REST_API}/exams`,{
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             }).then((res) => {
                 // console.log(res.data['exams']);
@@ -152,7 +154,8 @@ export default {
         getSubjects() {
             axios.get(`${process.env.VUE_APP_REST_API}/subjects`,{
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             }).then((res) => {
                 this.subjectList = res.data;
@@ -161,7 +164,8 @@ export default {
         getLevels() {
             axios.get(`${process.env.VUE_APP_REST_API}/levels`,{
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             }).then((res) => {
                 this.levels = res.data;
@@ -173,7 +177,8 @@ export default {
                 var subjects = this.selectedSubjects.map(function(val){return ++val;});
                 axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
                     headers: {
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     params: {
                         level: level,
@@ -187,7 +192,8 @@ export default {
                 level = this.selectedLevel + 1
                 axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
                     headers: {
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     params: {
                         level: level,
@@ -200,7 +206,8 @@ export default {
                 subjects = this.selectedSubjects.map(function(val){return ++val;});
                 axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
                     headers: {
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     params: {
                         subjects: subjects
