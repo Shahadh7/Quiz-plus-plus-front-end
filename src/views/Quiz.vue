@@ -218,7 +218,7 @@ export default {
         },
         test() {
             axios.get('https://safe-gorge-82079.herokuapp.com/api/exams/?level=1').then((res) => {
-                console.log(res.data)
+                console.log(res)
             })
         } 
     },
