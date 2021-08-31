@@ -219,11 +219,7 @@ export default {
         test() {
 
             return new Promise(function(resolve, reject) {
-                fetch('https://safe-gorge-82079.herokuapp.com/api/exams/', {
-                    params: {
-                    level: 1,
-                    }
-                }).then(response => {
+                fetch('https://safe-gorge-82079.herokuapp.com/api/exams').then(response => {
                     console.log(response.data);
                     resolve(response);
                 }).catch((err) => {
