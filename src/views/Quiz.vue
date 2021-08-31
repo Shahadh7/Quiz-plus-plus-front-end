@@ -223,7 +223,7 @@ export default {
                     mode: "no-cors",
                     headers: {
                         Accept: 'application/json',
-                        Host: 'https://safe-gorge-82079.herokuapp.com'
+                        Host: 'https://safe-gorge-82079.herokuapp.com/'
                     }
                 }).then(response => {
                     console.log(response);
