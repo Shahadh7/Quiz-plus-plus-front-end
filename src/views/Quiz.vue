@@ -171,7 +171,7 @@ export default {
               if((this.selectedLevel !== "" && this.selectedSubjects.length > 0 && isNaN(this.selectedLevel) == false )) {
                 var level = this.selectedLevel + 1
                 var subjects = this.selectedSubjects.map(function(val){return ++val;});
-                axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
+                axios.get(`${process.env.VUE_APP_REST_API}/exams`,{
                     params: {
                         level: level,
                         subjects: subjects
@@ -186,7 +186,7 @@ export default {
                 }) 
               }else if (this.selectedLevel !== "" && isNaN(this.selectedLevel) == false) {
                 level = this.selectedLevel + 1
-                axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
+                axios.get(`${process.env.VUE_APP_REST_API}/exams`,{
                     params: {
                         level: level,
                     },
@@ -199,7 +199,7 @@ export default {
                 }) 
               }else if (this.selectedSubjects.length > 0) {
                 subjects = this.selectedSubjects.map(function(val){return ++val;});
-                axios.get(`${process.env.VUE_APP_REST_API}/exams/`,{
+                axios.get(`${process.env.VUE_APP_REST_API}/exams`,{
                     params: {
                         subjects: subjects
                     },
@@ -219,11 +219,10 @@ export default {
         test() {
 
             return new Promise(function(resolve, reject) {
-                fetch('https://safe-gorge-82079.herokuapp.com/api/exams/?level=1',{
+                fetch('https://safe-gorge-82079.herokuapp.com/api/exams?level=1',{
                     mode: "no-cors",
                     headers: {
                         Accept: 'application/json',
-                        Host: 'https://safe-gorge-82079.herokuapp.com/'
                     }
                 }).then(response => {
                     console.log(response);
