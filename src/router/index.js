@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store/index'
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,10 @@ const routes = [
   {
     path: '/quiz',
     name: 'Quiz',
-    component: () => import(/* webpackChunkName: "quiz" */ '../views/Quiz.vue')
+    component: () => import(/* webpackChunkName: "quiz" */ '../views/Quiz.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/quiz/:slug',
@@ -45,6 +49,22 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      store.dispatch('checkKey').then(r => {
+        if (r.data.message === "valid") {
+          next()
+        }
+      })
+      return
+    }
+    next('/sign-in')
+  } else {
+    next()
+  }
 })
 
 export default router

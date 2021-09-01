@@ -43,7 +43,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <v-tooltip bottom>
+      <v-tooltip bottom  v-if="!isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on" @click="$router.push('/sign-in')">
             <v-icon class="white--text text--accent-4">mdi-login</v-icon>
@@ -52,7 +52,7 @@
         <span>Sign in</span>
       </v-tooltip>
 
-      <v-tooltip bottom>
+      <v-tooltip bottom v-if="!isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on" @click="$router.push('/sign-up')">
             <v-icon class="white--text text--accent-4" >mdi-account-plus</v-icon>
@@ -61,10 +61,10 @@
         <span>Sign up</span>
       </v-tooltip>
 
-      <v-tooltip bottom>
+      <v-tooltip bottom v-if="isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon class="white--text text--accent-4">mdi-logout</v-icon>
+          <v-btn icon v-bind="attrs" v-on="on"  @click="logout">
+            <v-icon class="white--text text--accent-4" >mdi-logout</v-icon>
           </v-btn>
         </template>
         <span>Sign out</span>
@@ -122,6 +122,17 @@ export default {
       }
     ]
   }),
+  computed : {
+    isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch('logout')
+    .then(() => {
+      this.$router.push('/sign-in')
+    })
+  }
+  },
 };
 </script>
 

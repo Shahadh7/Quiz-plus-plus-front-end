@@ -20,6 +20,7 @@
                     <v-text-field
                         label="Name"
                         autofocus
+                        v-model="name"
                     ></v-text-field>
                     </v-col>
 
@@ -30,7 +31,7 @@
                     sm="10"
                     md="10"
                     >
-                    <v-combobox :items="items" label="User type" ></v-combobox>
+                    <v-combobox :items="items" label="User type" v-model="user_type"></v-combobox>
                     </v-col>
 
                 </v-row>
@@ -42,6 +43,7 @@
                     >
                     <v-text-field
                         label="Email"
+                        v-model="email"
                     ></v-text-field>
                     </v-col>
 
@@ -72,7 +74,7 @@
                     md="10"
                     >
                     <v-text-field
-                        v-model="password"
+                        v-model="password_confirmation"
                         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                         :rules="[rules.required, rules.min]"
                         :type="show1 ? 'text' : 'password'"
@@ -91,11 +93,12 @@
                     md="10"
 
                     >
-                    <v-btn title="signin" color="secondary">Sign in</v-btn>   
+                    <v-btn title="signin" color="secondary" @click="register">Sign up</v-btn>   
                     </v-col>
                 </v-row>
             </v-card>
             </v-row>
+            
         </v-container>
     </div>
 </template>
@@ -104,16 +107,44 @@ export default {
     data() {
         return {
             show1: false,
+            name: "",
+            email: "",
             password: "",
+            password_confirmation: "",
+            user_type: "",           
             rules: {
                 required: value => !!value || 'Required.',
                 min: v => v.length >= 8 || 'Min 8 characters',
                 emailMatch: () => (`The email and password you entered don't match`),
             },
             items: [
-                'Instructor',
-                'Student',
-                ],
+                { header: 'Select a type' },
+                {
+                text: 'Instructor',
+                id: 1,
+                },
+                {
+                text: 'Student',
+                id: 2,
+                },
+            ],
+        }
+    },
+    methods: {
+        itemselected(e) {
+            console.log(e)
+        },
+        register: function () {
+            let user = {
+                name: this.name,
+                email: this.email,
+                password: this.password,
+                password_confirmation: this.password_confirmation,
+                user_type: parseInt(this.user_type.id),
+            }
+            this.$store.dispatch('register', user)
+            .then(() => this.$router.push('/'))
+            .catch(err => console.log(err))
         }
     },
 }

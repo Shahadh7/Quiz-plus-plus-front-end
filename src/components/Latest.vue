@@ -38,6 +38,7 @@
     name: 'Latest',
 
     data: () => ({
+      selectedItem: "",
       latestQuiz :[
         { 
           icon: 'mdi-cards-diamond-outline',
