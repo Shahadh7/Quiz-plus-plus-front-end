@@ -54,11 +54,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
-      store.dispatch('checkKey').then(r => {
-        if (r.data.message === "valid") {
-          next()
-        }
-      })
+      // store.dispatch('checkKey').then(r => {
+      //   if (r.data.message === "valid") {
+          //next()
+      //   }
+      next()
+      //})
       return
     }
     next('/sign-in')

@@ -4,6 +4,7 @@
     <p class="text-h2 white--text">PRACTICE MAKES PERFECT</p>
   </v-row>
   <latest />
+  <latest />
   <v-divider class="black"></v-divider>
 </v-container>
 </template>
@@ -17,5 +18,6 @@
     components: {
       Latest,
     },
-  }
+  
+        Latest}
 </script>

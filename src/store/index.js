@@ -94,21 +94,24 @@ export default new Vuex.Store({
         
       })
     },
-    checkKey ({ commit }) {
-      return new Promise((resolve, reject) => {
-        commit('auth_key_check')
-        axios({ url: `${process.env.VUE_APP_REST_API}/authcheck`, method: 'POST'  })
-          .then(resp => {
-              resolve(resp)
-              return resp
-          }).catch(err => {
-            commit('auth_error')
-            localStorage.removeItem('token')
-            reject(err)
-          })
-      }
-      )
-    },
+    // checkKey ({ commit }) {
+    //   return new Promise((resolve, reject) => {
+    //     commit('auth_key_check')
+    //     axios({ 
+    //       url: `${process.env.VUE_APP_REST_API}/authcheck`, 
+    //       method: 'POST'  
+    //     })
+    //     .then(resp => {
+    //           resolve(resp)
+    //           return resp
+    //     }).catch(err => {
+    //         commit('auth_error')
+    //         localStorage.removeItem('token')
+    //         reject(err)
+    //     })
+    //   }
+    //   )
+    // },
   },
   modules: {
   }
