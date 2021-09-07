@@ -64,7 +64,7 @@ export default new Vuex.Store({
           const token = resp.data.token
           const user = resp.data.user
           localStorage.setItem('token', token)
-          axios.defaults.headers.common['Authorization'] = token
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
           commit('auth_success', token, user)
           alert("signed in successfully")
           resolve(resp)
@@ -79,7 +79,8 @@ export default new Vuex.Store({
     logout({commit}){
       return new Promise((resolve,reject) => {
         axios({url: `${process.env.VUE_APP_REST_API}/logout`, method: 'POST',headers: {
-          "Accept" : "application/json"
+          "Accept" : "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
         } })
         .then(resp => {
           commit('logout')
