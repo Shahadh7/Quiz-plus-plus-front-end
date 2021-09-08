@@ -132,8 +132,9 @@ export default {
         }
     },
     mounted() {
-        this.currentQuiz = this.questionAnswers[0]
         this.getAllQuestionAndAnswers();
+        this.currentQuiz = this.questionAnswers[0]
+        
     },
 }
 </script>
