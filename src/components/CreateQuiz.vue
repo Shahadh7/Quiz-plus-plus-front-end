@@ -31,7 +31,7 @@
                   <v-btn
                       dark
                       text
-                      @click="dialog = false"
+                      @click="createExam"
                   >
                       Save Quiz
                   </v-btn>
@@ -51,12 +51,12 @@
                         </v-text-field>
                         <v-select
                           v-model="level"
-                          :items="['Grade 1','Grade 2','Grade 3']"
+                          :items="levels"
                           label="Level"
                         ></v-select>
                         <v-select
                           v-model="subject"
-                          :items="['Maths','Science','English']"
+                          :items="subjects"
                           label="Subject"
                         ></v-select>
                         <v-select
@@ -64,8 +64,50 @@
                           :items="[5,10,15,20,25,30,40,50]"
                           label="No of questions want to create?"
                         ></v-select>
+                        <v-dialog
+                          ref="dialog"
+                          v-model="modal2"
+                          :return-value.sync="time"
+                          persistent
+                          width="290px"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="time"
+                              label="Time"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-time-picker
+                            v-if="modal2"
+                            v-model="time"
+                            full-width
+                            color="secondary"
+                            scrollable
+                            format="24hr"
+                          >
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              text
+                              color="secondary"
+                              @click="modal2 = false"
+                            >
+                              Cancel
+                            </v-btn>
+                            <v-btn
+                              text
+                              color="secondary"
+                              @click="$refs.dialog.save(time)"
+                            >
+                              OK
+                            </v-btn>
+                          </v-time-picker>
+                        </v-dialog>
                       </v-card-text>
                     </v-card>
+                    {{time}}
                   </div>
               </v-container>
               <question :questionCount="steps"></question>
@@ -76,14 +118,18 @@
 </template>
 <script>
 import Question from './Question.vue'
+// import axios from 'axios'
 export default {
-  components: { Question },
+    components: { Question },
+    props: ['subjects','levels'],
     data () {
       return {
         e6: 1,
         steps: 5,
         level:1,
         subject:1,
+        time: null,
+        modal2: false,
         showSubmit:false,
         dialog: false,
       }
@@ -105,7 +151,23 @@ export default {
           this.e6 = n + 1
         }
       },
+      createExam() {
+
+      },
+      // getAllDropDownData() {
+      //   axios.get(`${process.env.VUE_APP_REST_API}/subjects`,{
+      //           headers: {
+      //               'Accept': 'application/json'
+      //           }
+      //       }).then((res) =>{
+      //           console.log(res.data);
+      //           // this.randomtext = res.data.saying+"("+res.data.author+")";
+      //       })
+      // }
       
+    },
+    mounted() {
+      // this.getAllDropDownData()
     },
     
 }

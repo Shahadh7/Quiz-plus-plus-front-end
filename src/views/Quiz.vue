@@ -11,7 +11,7 @@
                 <v-toolbar flat color="silver accent-5" light outlined >
                     <v-card-title class="blue--text text--accent-4"></v-card-title>
                    <v-spacer></v-spacer>
-                    <create-quiz></create-quiz>
+                    <create-quiz  :levels="levels" :subjects="subjectList"></create-quiz>
                 </v-toolbar>
                     <v-expansion-panels focusable>
                     <v-expansion-panel>
@@ -51,7 +51,6 @@
                                     </v-chip>
                                 </v-chip-group>
                             </v-card-text>
-                            {{selectedLevel}}
                             <v-btn color="secondary" class="ml-4" @click="filterExams">Filter</v-btn>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
