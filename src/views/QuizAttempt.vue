@@ -93,7 +93,6 @@ export default {
             paginationCount: 0,
             questionAnswers: [],
             currentQuiz: [],
-            
             selectedAnswers: [],
             page: 1,
         }
@@ -101,7 +100,7 @@ export default {
     methods: {
         getAllQuestionAndAnswers() {
             console.log(this.$route.params.id);
-
+            
             axios.get(`${process.env.VUE_APP_REST_API}/exams/${this.$route.params.id}`).then((res) => {
                 console.log(res.data);
                 this.questionAnswers = res.data.quizs

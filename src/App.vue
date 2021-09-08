@@ -98,12 +98,7 @@ export default {
       {
         "text": "Home",
         "path" : "/",
-        "icon" : "mdi-home"
-      },
-      {
-        "text": "Sign in",
-        "path" : "/sign-in",
-        "icon" : "mdi-login"
+        "icon" : "mdi-home",
       },
       {
         "text": "Quiz",
