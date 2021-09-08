@@ -105,6 +105,7 @@ export default {
             axios.get(`${process.env.VUE_APP_REST_API}/exams/${this.$route.params.id}`).then((res) => {
                 console.log(res.data);
                 this.questionAnswers = res.data.quizs
+                this.currentQuiz = this.questionAnswers[0]
             }).catch((err) => {
                 console.log(err);
             })
@@ -133,8 +134,6 @@ export default {
     },
     mounted() {
         this.getAllQuestionAndAnswers();
-        this.currentQuiz = this.questionAnswers[0]
-        
     },
 }
 </script>
