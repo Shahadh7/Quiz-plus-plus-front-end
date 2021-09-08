@@ -191,7 +191,7 @@ export default {
         getAllQuestionAndAnswers() {
             console.log(this.$route.params.id);
 
-            axios.get(`${process.env.VUE_APP_REST_API}/api/exams/${this.$route.params.id}`).then((res) => {
+            axios.get(`${process.env.VUE_APP_REST_API}/exams/${this.$route.params.id}`).then((res) => {
                 console.log(res.data);
                 this.questionAnswers = res.data.quizs
             }).catch((err) => {
