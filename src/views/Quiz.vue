@@ -63,22 +63,22 @@
                             color="primary"
                             
                         >
-                            <div v-if="availableExams">
-                                    <v-list-item
-                            v-for="(item) in availableExams"
-                            :key="item.id"
-                            >
-                                <v-list-item-icon>
-                                    <v-icon v-text="icon"></v-icon>
-                                </v-list-item-icon>
-                                <v-list-item-content>
-                                    <v-list-item-title v-text="item.exam_name"></v-list-item-title>
-                                    <p class="text--secondary">Duration: {{item.duration}}</p>
-                                    <p class="text--secondary">No of attempts: --</p>
-                                    <p class="text--secondary">Exam date: {{item.date}}</p>
-                                </v-list-item-content>
-                                <v-btn color="secondary" @click="$router.push({ name: 'QuizAttempt', params: { slug: item.slug , id: item.id } })">Attempt</v-btn>
-                            </v-list-item>
+                            <div v-if="availableExams.length > 0">
+                                <v-list-item
+                                    v-for="(item) in availableExams"
+                                    :key="item.id"
+                                >
+                                    <v-list-item-icon>
+                                        <v-icon v-text="icon"></v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title v-text="item.exam_name"></v-list-item-title>
+                                        <p class="text--secondary">Duration: {{item.duration}}</p>
+                                        <p class="text--secondary">No of attempts: --</p>
+                                        <p class="text--secondary">Exam date: {{item.date}}</p>
+                                    </v-list-item-content>
+                                    <v-btn color="secondary" @click="$router.push({ name: 'QuizAttempt', params: { slug: item.slug , id: item.id } })">Attempt</v-btn>
+                                </v-list-item>
                             </div>
                             <div v-else>
                                 No exams available
