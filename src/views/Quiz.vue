@@ -80,7 +80,7 @@
                                     <v-btn color="secondary" @click="$router.push({ name: 'QuizAttempt', params: { slug: item.slug , id: item.id } })">Attempt</v-btn>
                                 </v-list-item>
                             </div>
-                            <div v-else>
+                            <div v-else class="text-center">
                                 No exams available
                             </div>
                             
