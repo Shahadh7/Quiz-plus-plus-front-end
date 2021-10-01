@@ -8,15 +8,15 @@
                </v-col>
             </v-row>
             <v-card class="mx-auto mt-10">
-                <v-toolbar flat color="lime lighten-4" light outlined >
+                <v-toolbar flat  light outlined >
                     <v-card-title class="blue--text text--accent-4 lime lighten-4"></v-card-title>
                    <v-spacer></v-spacer>
                     <create-quiz  :levels="levels" :subjects="subjectList"></create-quiz>
                 </v-toolbar>
-                    <v-expansion-panels focusable class="lime lighten-4">
+                    <v-expansion-panels focusable>
                     <v-expansion-panel>
-                        <v-expansion-panel-header class="lime lighten-4">Filter</v-expansion-panel-header>
-                        <v-expansion-panel-content class="lime lighten-4">
+                        <v-expansion-panel-header>Filter</v-expansion-panel-header>
+                        <v-expansion-panel-content>
                             <v-card-text>
                                 <h2 class="text-h6 mb-2">
                                     Choose Level
@@ -56,7 +56,7 @@
                     </v-expansion-panel>
                     </v-expansion-panels>
 
-                    <v-list shaped class="lime lighten-4">
+                    <v-list shaped>
                         <v-subheader>Available quizzes</v-subheader>
                         <v-list-item-group
                             color="primary"

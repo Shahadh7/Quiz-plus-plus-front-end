@@ -5,7 +5,7 @@
     max-width="1300px"
     tile
   >
-    <v-list shaped class="lime lighten-4">
+    <v-list shaped>
       <v-subheader>Latest Exams</v-subheader>
       <v-list-item-group
         v-model="selectedItem"

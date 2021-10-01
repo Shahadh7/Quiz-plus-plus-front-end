@@ -1,24 +1,67 @@
 <template>
 <v-container>
-  <v-row class="justify-center">
+  
+    <kinesis-container >
+      <v-row class="justify-left">
+          <h1>
+             <kinesis-element :strength="5" style="display:inline-block;">
+                <span class="letter">
+                  Q
+                </span>
+             </kinesis-element>
+             <kinesis-element :strength="15" style="display:inline-block;">
+                <span class="letter">
+                  U
+                </span>
+             </kinesis-element>
+             <kinesis-element :strength="5" style="display:inline-block;">
+                <span class="letter">
+                  I
+                </span>
+             </kinesis-element>
+             <kinesis-element :strength="15" style="display:inline-block;">
+                <span class="letter">
+                  Z
+                </span>
+             </kinesis-element>
+             <kinesis-element :strength="5" style="display:inline-block;">
+                <span class="letter">
+                  +
+                </span>
+             </kinesis-element>
+              <kinesis-element :strength="15" style="display:inline-block;">
+                <span class="letter">
+                  +
+                </span>
+             </kinesis-element>
+          </h1> 
+          <kinesis-element :strength="20" style="display:inline-block;" class="text-left" >
+                <p class="white--text text-h5 ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eius in tenetur sint cupiditate quam facere, blanditiis non ut quia a, suscipit, asperiores similique earum deleniti excepturi quis consectetur iusto cumque laudantium deserunt sapiente quibusdam. Voluptatum esse vitae iure quibusdam ipsam nemo hic tenetur quia, eum illum deserunt dolorem, ex consequatur numquam animi quas in totam rerum distinctio, minima cumque deleniti. A, tempore adipisci minima ullam maxime provident esse quod.</p>
+          </kinesis-element>
 
-  </v-row>
-  <latest />
+        </v-row>
+    </kinesis-container>
+        
+  
 </v-container>
 </template>
 
 <script>
-  import Latest from '../components/Latest'
-
+  import { KinesisContainer, KinesisElement} from 'vue-kinesis'
   export default {
     name: 'Home',
 
     components: {
-      Latest,
+      KinesisContainer,
+      KinesisElement
     },
   
-        Latest}
+}
 </script>
 <style scoped>
-
+.letter{
+  font-size: 5rem;
+  color: white;
+  letter-spacing: 5px;
+}
 </style>
