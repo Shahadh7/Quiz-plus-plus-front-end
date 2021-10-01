@@ -133,10 +133,7 @@ export default {
 
 <style scoped>
 .back { 
-  background: url(assets/back.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: rgb(0,0,0);
+background: linear-gradient(159deg, rgba(0,0,0,1) 0%, rgba(128,73,0,1) 49%, rgba(249,255,0,1) 100%);
 }
 </style>

@@ -1,12 +1,7 @@
 <template>
     <div>
         <v-container>
-            <v-row class="justify-center mb-5">
-                <div class="d-flex flex-column">
-                    <h1 class="text-sm-h1" >QUIZ++</h1>
-                </div>
-            </v-row>
-            <v-row class="justify-center">
+            <v-row class="justify-center pt-4">
                 <v-card width="500px">
 
                 <v-card-title class="lime accent-2 black--text">Sign up</v-card-title>
@@ -140,7 +135,7 @@ export default {
                 email: this.email,
                 password: this.password,
                 password_confirmation: this.password_confirmation,
-                user_type: parseInt(this.user_type.id),
+                role: this.user_type.text,
             }
             this.$store.dispatch('register', user)
             .then(() => this.$router.push('/'))
